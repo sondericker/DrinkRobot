@@ -1,6 +1,6 @@
 
 
-//  CatToy - Raspberry Pi Cat Toy
+//  DrinkRobot - a drink stirring robot
 
 
 #include <iostream>
@@ -19,23 +19,23 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	cout << "into main.\n\n";
-	CatToy ct;
-	ct.startUp();
-	cout << "back from startUp\n";
+	cout << "into main." << endl;
+
+	DrinkRobot *drx = new DrinkRobot;
+	drx->startUp();
+	cout << "back from startUp\n" << endl;;
 
 	return 0;
 }
 
 
-CatToy::CatToy()
-{		
-	
-	
+DrinkRobot::DrinkRobot() {		
+
+	cout << "DrinkRobot constructor" << endl;
 }
 
 
-void CatToy::startUp() {
+void DrinkRobot::startUp() {
 	
 	cout << "Made it to startUp()\n";
 	
@@ -57,7 +57,7 @@ void CatToy::startUp() {
 }
 
 
-void CatToy::printTime () {
+void DrinkRobot::printTime () {
 	
     struct timeval start, end;
 

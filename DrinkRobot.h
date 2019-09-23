@@ -3,14 +3,13 @@
 
 
 
-class CatToy {
+class DrinkRobot {
 
-	public:	
-	struct timeval start, end;
-	
-	CatToy();
+	public:		
+	DrinkRobot();
 	void startUp();
 	void printTime();
+	struct timeval start, end;	
 	protected:
 	
 	private:

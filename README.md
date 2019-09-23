@@ -1,2 +1,2 @@
-# CatToy
-Raspberry Pi-based laser chase cat toy
+# DrinkRobot
+Raspberry Pi-based drink stirring robot

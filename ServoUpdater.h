@@ -12,6 +12,18 @@
 #define MIN_STEP 210.0
 #define MAX_STEP 1010.0
 
+#define MIN_STEP_A 210.0
+#define MAX_STEP_A 1010.0
+#define MIN_STEP_B 210.0
+#define MAX_STEP_B 1010.0
+#define MIN_STEP_C 210.0
+#define MAX_STEP_C 1010.0
+#define MIN_STEP_D 210.0
+#define MAX_STEP_D 1010.0
+#define MIN_STEP_E 210.0
+#define MAX_STEP_E 1010.0
+
+
 class ServoUpdater {
 	
 	public:
