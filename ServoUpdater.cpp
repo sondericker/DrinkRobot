@@ -31,8 +31,8 @@ using namespace std;
 
 ServoUpdater::ServoUpdater() {
 	
-    wiringPiSetupGpio ();                   // setup for laser control
-	pinMode (21, OUTPUT);
+    wiringPiSetupGpio ();                   // setup for button read
+	pinMode (BUTTON_PIN, INPUT);
 	
 	// init pwm driver which will handle both pwm outputs being used
 	pwm.initPWM(PWM_HAT_ADDRESS);			// default i2c hat address
@@ -431,7 +431,17 @@ bool ServoUpdater::getRunning() {
 	return(x);	
 }
 
-
+bool ServoUpdater::getButtonState() {
+	
+	// read pin
+	if (digitalRead(BUTTON_PIN) == HIGH) {
+		return(false);
+	} else {
+		cout << "Button pushed!" << endl;
+		return(true);
+	}
+	
+}
 	
 
 

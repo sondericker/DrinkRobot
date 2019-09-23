@@ -341,7 +341,6 @@ void TerminalUI::printMenu() {
 	cout << "p - Print profile" << endl;
 	cout << "c - Clear profile" << endl;
 	cout << "t - Test profile" << endl;	
-	cout << "r - Run DrinkRobot" << endl;
 	cout << "s - Save profile" << endl;
 	cout << "l - Load profile" << endl;
 	cout << "q - quit program" << endl;
@@ -418,67 +417,53 @@ void TerminalUI::runUI() {
 							
 			case 'p':
 			
+			for (int x=0; x< mProfile.numSteps; x++) {
+				
+				cout << mProfile.posA[x] << ", " << mProfile.posB[x] << ", " << mProfile.posC[x] << ", " << mProfile.posD[x] << ", " << mProfile.posE[x] << ", "
+				 << mProfile.speed[x] << ", " << mProfile.pause[x] << endl;
+				
+			}
+			
 				break;
 			
 			case 'c':
 			
-				break;
-				
-			case 'r':
-			
-				int numCycles, sleepTime;
-				
-				cout << "Number of cycles per run:";
-				cin >> numCycles;
-				
-				cout << "Sleep time (sec) between runs:";
-				cin >> sleepTime;
-			
-				tp.tv_sec = 0;
-				tp.tv_nsec = 1000000;
-				
-				while(true) {
-					for (int y=0; y<numCycles; y++) {
-						for (int x = 0; x < mProfile.numSteps; x++) {
-							
-							sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
-							cout << "Moving to step:" << x << " pan:" << mProfile.posA[x] <<
-							 " tilt:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
-							  " for pause:" << mProfile.pause[x] << endl;
-							  
-							while(!sUpdater->getmoveComplete()) {						
-								nanosleep(&tp, NULL);						
-							}						
-							cout << "Finished move." << endl;				
-						}
-					}
-					sleep(sleepTime);					
-					
-				}
-					
+			mProfile.numSteps = 0;
+			cout << "Profile cleared." << endl;
 			
 				break;
 				
+			
 			case 't':
 			
 			
-				tp.tv_sec = 0;
-				tp.tv_nsec = 1000000;
-				
-					for (int x = 0; x < mProfile.numSteps; x++) {
-						
-						sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
-						cout << "Moving to step:" << x << " posA:" << mProfile.posA[x] <<
-						 " posB:" << mProfile.posB[x]  << " posC:" << mProfile.posC[x]  << " posD:" << mProfile.posD[x]  << " posE:" << mProfile.posE[x]  << " at speed:" << mProfile.speed[x]  <<
-						  " for pause:" << mProfile.pause[x] << endl;
-						  
-						while(!sUpdater->getmoveComplete()) {						
-							nanosleep(&tp, NULL);						
-						}						
-						cout << "Finished move." << endl;				
-					}
+			tp.tv_sec = 0;
+			tp.tv_nsec = 1000000;
+	
+		
+			// wait for the button to be pressed. Poll every ms
+			
+			cout << "Waiting for button press.." << endl;	
+			
+			while (!sUpdater->getButtonState()) {
+				nanosleep(&tp, NULL);
+			}								
+			
+			for (int x = 0; x < mProfile.numSteps; x++) {						
+				sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
+					cout << "Moving to step:" << x << " posA:" << mProfile.posA[x] <<
+					" posB:" << mProfile.posB[x]  << " posC:" << mProfile.posC[x]  << " posD:" << mProfile.posD[x]  << " posE:" << mProfile.posE[x]  << " at speed:" << mProfile.speed[x]  <<
+					" for pause:" << mProfile.pause[x] << endl;						  
 					
-				break;
+				while(!sUpdater->getmoveComplete()) {						
+					nanosleep(&tp, NULL);						
+				}	
+									
+				cout << "Finished move." << endl;				
+				
+			}
+					
+			break;
 
 			case 's':
 				fileU.saveProfile(mProfile);
@@ -517,39 +502,38 @@ void TerminalUI::runUI() {
 void TerminalUI::autoRunUI() {
 
 	FileUtils fileU;
-	struct timespec tp;
 	
-				fileU.loadProfile(&mProfile);
-				cout << "Motion Profile Loaded." << endl;		
+	fileU.loadProfile(&mProfile);
+	cout << "Motion Profile Loaded." << endl;		
 
+
+	struct timespec tp;
+	tp.tv_sec = 0;
+	tp.tv_nsec = 1000000;
 	
-	
-				int numCycles, sleepTime;
-				
-				numCycles = AUTORUN_PROFILE_CYCLES;	
-				sleepTime = AUTORUN_SLEEP_TIME;
+	while(true) {
+		
+		// wait for the button to be pressed. Poll every ms
+		while (!sUpdater->getButtonState()) {
+			nanosleep(&tp, NULL);
+		}
 			
-				tp.tv_sec = 0;
-				tp.tv_nsec = 1000000;
-				
-				while(true) {
-					for (int y=0; y<numCycles; y++) {
-						for (int x = 0; x < mProfile.numSteps; x++) {
-							
-							sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
-							cout << "Moving to step:" << x << " pan:" << mProfile.posA[x] <<
-							 " tilt:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
-							  " for pause:" << mProfile.pause[x] << endl;
-							  
-							while(!sUpdater->getmoveComplete()) {						
-								nanosleep(&tp, NULL);						
-							}						
-							cout << "Finished move." << endl;				
-						}
-					}
-					sleep(sleepTime);					
-					
-				}
+		// Button was pushed, run profile
+		
+		for (int x = 0; x < mProfile.numSteps; x++) {
+			
+			sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
+			cout << "Moving to step:" << x << " pan:" << mProfile.posA[x] <<
+			 " tilt:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
+			  " for pause:" << mProfile.pause[x] << endl;
+			  
+			while(!sUpdater->getmoveComplete()) {						
+				nanosleep(&tp, NULL);						
+			}						
+			cout << "Finished move." << endl;				
+		}
+		
+	}
 
 }
 
@@ -577,5 +561,7 @@ void TerminalUI::editProfile() {
 	}
 	
 }
+
+
 
 

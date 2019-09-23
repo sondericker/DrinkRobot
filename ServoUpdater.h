@@ -23,6 +23,8 @@
 #define MIN_STEP_E 210.0
 #define MAX_STEP_E 1010.0
 
+#define BUTTON_PIN 21
+
 
 class ServoUpdater {
 	
@@ -41,7 +43,7 @@ class ServoUpdater {
 	double getPosFromStepD(double step);	
 	double getStepFromPosE(double pos);
 	double getPosFromStepE(double step);
-
+	bool getButtonState();
 
 
 	double getdestPosA();		// 0.0 - 1.0 pan destination position

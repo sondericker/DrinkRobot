@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 {
 	DrinkRobot *drx = new DrinkRobot;
 	drx->startUp();
-	cout << "back from DrinkRobot, exiting!" << endl;;
+	cout << "back from DrinkRobot, exiting!" << endl;
 
 	return 0;
 }
