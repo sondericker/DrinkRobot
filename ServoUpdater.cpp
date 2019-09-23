@@ -264,6 +264,25 @@ double ServoUpdater::getdestPosB() {
 	return(x);
 }
 
+double ServoUpdater::getdestPosC() {
+	pthread_mutex_lock(&lock);
+	double x = destPosC;
+	pthread_mutex_unlock(&lock);
+	return(x);
+	
+}double ServoUpdater::getdestPosD() {
+	pthread_mutex_lock(&lock);
+	double x = destPosD;
+	pthread_mutex_unlock(&lock);
+	return(x);
+	
+}double ServoUpdater::getdestPosE() {
+	pthread_mutex_lock(&lock);
+	double x = destPosE;
+	pthread_mutex_unlock(&lock);
+	return(x);
+}
+
 double ServoUpdater::getcurPosA() {
 	pthread_mutex_lock(&lock);
 	double x = curPosA;
@@ -277,6 +296,27 @@ double ServoUpdater::getcurPosB() {
 	pthread_mutex_unlock(&lock);
 	return(x);
 }
+
+double ServoUpdater::getcurPosC() {
+	pthread_mutex_lock(&lock);
+	double x = curPosC;
+	pthread_mutex_unlock(&lock);
+	return(x);
+}
+double ServoUpdater::getcurPosD() {
+	pthread_mutex_lock(&lock);
+	double x = curPosD;
+	pthread_mutex_unlock(&lock);
+	return(x);
+}
+double ServoUpdater::getcurPosE() {
+	pthread_mutex_lock(&lock);
+	double x = curPosE;
+	pthread_mutex_unlock(&lock);
+	return(x);
+}
+
+
 
 bool ServoUpdater::getmoveComplete() {
 	pthread_mutex_lock(&lock);

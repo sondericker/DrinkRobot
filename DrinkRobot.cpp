@@ -11,7 +11,7 @@
 #include "MotionProfile.h"
 #include "ServoUpdater.h"
 #include "TerminalUI.h"
-#include "CatToy.h"
+#include "DrinkRobot.h"
 
 
 using namespace std;

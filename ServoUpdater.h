@@ -24,9 +24,16 @@ class ServoUpdater {
 
 	double getdestPosA();		// 0.0 - 1.0 pan destination position
 	double getdestPosB();		// 0.0 - 1.0 tilt destination position
+	double getdestPosC();		// 0.0 - 1.0 tilt destination position
+	double getdestPosD();		// 0.0 - 1.0 tilt destination position
+	double getdestPosE();		// 0.0 - 1.0 tilt destination position
+	
 	double getdestSpeed();		// 0.0 - 1.0 representing slowest to fastest speed
 	double getcurPosA();			// pan current position
 	double getcurPosB();			// tilt current position	
+	double getcurPosC();			// tilt current position		
+	double getcurPosD();			// tilt current position	
+	double getcurPosE();			// tilt current position			
 	bool getmoveComplete();	
 	bool getRunning();
 	void setLaserOn();
@@ -44,10 +51,17 @@ class ServoUpdater {
 	
 	double destPosA;		// 0.0 - 1.0 pan destination position
 	double destPosB;		// 0.0 - 1.0 tilt destination position
+	double destPosC;		// 0.0 - 1.0 tilt destination position
+	double destPosD;		// 0.0 - 1.0 tilt destination position
+	double destPosE;		// 0.0 - 1.0 tilt destination position
 	double destSpeed;		// 0.0 - 1.0 representing slowest to fastest speed
 	double destPause;
 	double curPosA;			// pan current position
 	double curPosB;			// tilt current position	
+	double curPosC;			// tilt current position	
+	double curPosD;			// tilt current position	
+	double curPosE;			// tilt current position	
+
 	bool moveComplete;	
 
 };

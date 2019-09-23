@@ -1,10 +1,10 @@
 
-DrinkROboty:DrinkRoboty.o PWMDriver.o MotionProfile.o ServoUpdater.o TerminalUI.o FileUtils.o
-	g++ -Wall -g -o DrinkRoboty oDrinkRoboty.o PWMDriver.o MotionProfile.o ServoUpdater.o TerminalUI.o FileUtils.o -L/sw/lib/root -lwiringPi -lpthread
+DrinkRobot:DrinkRobot.o PWMDriver.o MotionProfile.o ServoUpdater.o TerminalUI.o FileUtils.o
+	g++ -Wall -g -o DrinkRobot DrinkRobot.o PWMDriver.o MotionProfile.o ServoUpdater.o TerminalUI.o FileUtils.o -L/sw/lib/root -lwiringPi -lpthread
 
 
 DrinkRobot.o:DrinkRobot.cpp DrinkRobot.h
-	g++ -Wall -g -c -pthread -I/sw/include/root CatToy.cpp
+	g++ -Wall -g -c -pthread -I/sw/include/root DrinkRobot.cpp
     
 PWMDriver.o:PWMDriver.cpp PWMDriver.h
 	g++ -Wall -g -c -pthread -I/sw/include/root PWMDriver.cpp    
