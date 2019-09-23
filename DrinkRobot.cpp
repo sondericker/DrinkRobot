@@ -19,25 +19,18 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	cout << "into main." << endl;
-
 	DrinkRobot *drx = new DrinkRobot;
 	drx->startUp();
-	cout << "back from startUp\n" << endl;;
+	cout << "back from DrinkRobot, exiting!" << endl;;
 
 	return 0;
 }
 
-
 DrinkRobot::DrinkRobot() {		
 
-	cout << "DrinkRobot constructor" << endl;
 }
 
-
 void DrinkRobot::startUp() {
-	
-	cout << "Made it to startUp()\n";
 	
 	sUpdater.start();
 	

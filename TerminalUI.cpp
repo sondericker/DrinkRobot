@@ -24,7 +24,7 @@ void TerminalUI::driveToPosition() {
 
 	system("clear");
 
-	cout << "Use wasd to move the laser into position and enter to set. Enter Q when finished." << endl;
+	cout << "Use a:d, w:s, r:f. t:g, y:h to move arm into position and enter to set. Enter Q when finished." << endl;
 	
 	sUpdater->setLaserOn();
 	
@@ -187,11 +187,11 @@ void TerminalUI::printMenu() {
 		
 	cout << "Main Menu" << endl << endl;
 	
-	cout << "m - move laser / add profile points" << endl;
+	cout << "m - move arm / add profile points" << endl;
 	cout << "p - Print profile" << endl;
 	cout << "c - Clear profile" << endl;
 	cout << "t - Test profile" << endl;	
-	cout << "r - Run CatToy" << endl;
+	cout << "r - Run DrinkRobot" << endl;
 	cout << "s - Save profile" << endl;
 	cout << "l - Load profile" << endl;
 	cout << "q - quit program" << endl;
@@ -313,11 +313,12 @@ void TerminalUI::runUI() {
 			
 				tp.tv_sec = 0;
 				tp.tv_nsec = 1000000;
+				
 					for (int x = 0; x < mProfile.numSteps; x++) {
 						
 						sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
 						cout << "Moving to step:" << x << " posA:" << mProfile.posA[x] <<
-						 " posB:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
+						 " posB:" << mProfile.posB[x]  << " posC:" << mProfile.posC[x]  << " posD:" << mProfile.posD[x]  << " posE:" << mProfile.posE[x]  << " at speed:" << mProfile.speed[x]  <<
 						  " for pause:" << mProfile.pause[x] << endl;
 						  
 						while(!sUpdater->getmoveComplete()) {						
@@ -326,8 +327,7 @@ void TerminalUI::runUI() {
 						cout << "Finished move." << endl;				
 					}
 					
-				sUpdater->setLaserOff();
-			
+				sUpdater->setLaserOff();			
 				break;
 
 			case 's':
@@ -337,8 +337,7 @@ void TerminalUI::runUI() {
 
 			case 'l':		
 				fileU.loadProfile(&mProfile);
-				cout << "Motion Profile Loaded." << endl;		
-				
+				cout << "Motion Profile Loaded." << endl;						
 				break;
 
 			case 'q':
@@ -347,19 +346,18 @@ void TerminalUI::runUI() {
 				break;
 				
 			case '1':
-				sUpdater->goToPos(0.0, 0.0, 0.5, 0.5, 0.5, 1.0, 0.0);
+				sUpdater->goToPos(0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 				break;
-				
 			case '2':
-				sUpdater->goToPos(1.0, 1.0, 0.5, 0.5, 0.5, 1.0, 0.0);
+				sUpdater->goToPos(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0);
 				break;
-
 			case '3':
-				sUpdater->goToPos(0.5, 0.5, 0.5, 0.5, 0.5, 0.05, 0.0);
+				sUpdater->goToPos(0.5, 0.5, 0.5, 0.5, 0.5, 1.0, 0.0);
 				break;
 			case '4':
-				sUpdater->goToPos(0.0, 1.0, 0.5, 0.5, 0.5, 1.0, 0.0);
+				sUpdater->goToPos(0.5, 1.0, 0.5, 1.0, 0.5, 1.0, 0.0);
 				break;
+				
 			}
 	}
 }
