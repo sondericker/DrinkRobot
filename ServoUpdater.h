@@ -9,8 +9,8 @@
 
 #define STEPS_SLOWEST_SPEED 0.1
 #define STEPS_FASTEST_SPEED 5.0
-#define MIN_STEP 210.0
-#define MAX_STEP 1010.0
+//#define MIN_STEP 210.0
+//#define MAX_STEP 1010.0
 
 #define MIN_STEP_A 210.0
 #define MAX_STEP_A 1010.0
@@ -31,8 +31,18 @@ class ServoUpdater {
 	void start();
 	void stop();
 	void goToPos(double posA, double posB, double posC, double posD, double posE, double speed, double pause);	
-	double getStepFromPos(double pos);
-	double getPosFromStep(double step);
+	double getStepFromPosA(double pos);
+	double getPosFromStepA(double step);
+	double getStepFromPosB(double pos);
+	double getPosFromStepB(double step);	
+	double getStepFromPosC(double pos);
+	double getPosFromStepC(double step);	
+	double getStepFromPosD(double pos);
+	double getPosFromStepD(double step);	
+	double getStepFromPosE(double pos);
+	double getPosFromStepE(double step);
+
+
 
 	double getdestPosA();		// 0.0 - 1.0 pan destination position
 	double getdestPosB();		// 0.0 - 1.0 tilt destination position
@@ -48,8 +58,7 @@ class ServoUpdater {
 	double getcurPosE();			// tilt current position			
 	bool getmoveComplete();	
 	bool getRunning();
-	void setLaserOn();
-	void setLaserOff();	
+
 	protected:
 	
 	private:

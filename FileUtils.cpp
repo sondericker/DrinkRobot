@@ -19,7 +19,7 @@ void FileUtils::loadProfile(MotionProfile* mp) {
 	
 	//MotionProfile mp;
 	
-    ifstream file ( "/home/pi/Projects/CatToy/profile.csv" ); // declare file stream: http://www.cplusplus.com/reference/iostream/ifstream/
+    ifstream file ( "/home/pi/Projects/DrinkRobot/profile.csv" ); // declare file stream: http://www.cplusplus.com/reference/iostream/ifstream/
     string value;
     list<string> values;
     while ( file.good() )
@@ -111,7 +111,7 @@ void FileUtils::split_line(string& line, string delim, list<string>& values)
 
 void FileUtils::saveProfile(MotionProfile mp) {
 	
-   ofstream oFile ( "/home/pi/Projects/CatToy/profile.csv" ); 				// declare file stream: http://www.cplusplus.com/reference/iostream/ofstream/
+   ofstream oFile ( "/home/pi/Projects/DrinkRobot/profile.csv" ); 				// declare file stream: http://www.cplusplus.com/reference/iostream/ofstream/
 	
 	for (int x=0; x < mp.numSteps; x++) {
 		

@@ -31,6 +31,19 @@ void MotionProfile::addStep(double inPosA, double inPosB, double inPosC, double 
 }
 
 
+void MotionProfile::editStep(double inPosA, double inPosB, double inPosC, double inPosD, double inPosE, double stepSpeed, double stepPause, int stepNum) {
+	cout << "Into add step\n";
+	
+	posA[stepNum] = inPosA;
+	posB[stepNum] = inPosB;
+	posC[stepNum] = inPosC;
+	posD[stepNum] = inPosD;
+	posE[stepNum] = inPosE;
+	
+	speed[stepNum] = stepSpeed;
+	pause[stepNum] = stepPause;
+	
+}
 
 
 

@@ -7,6 +7,8 @@ class MotionProfile {
 	public:
 	MotionProfile();
 	void addStep(double inPosA, double inPosB, double inPosC, double inPosD, double inPosE, double stepSpeed, double pause);
+	void editStep(double inPosA, double inPosB, double inPosC, double inPosD, double inPosE, double stepSpeed, double pause, int stepNum);
+	
 	int numSteps;
 	double posA[1000];
 	double posB[1000];

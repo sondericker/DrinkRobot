@@ -15,15 +15,13 @@ class TerminalUI {
 	protected:
 
 	private:
-	double panPos;
-	int panPosTicks;
-	double tiltPos;
-	int tiltPosTicks;
 	
 	ServoUpdater* sUpdater;
 	MotionProfile mProfile;
-	void driveToPosition();
+	void driveAndAddPoints();
+	void driveAndEditPoint(int stepNum);
 	void printMenu();
 	char getCommand();
+	void editProfile();
 	
 };

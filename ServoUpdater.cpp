@@ -33,7 +33,6 @@ ServoUpdater::ServoUpdater() {
 	
     wiringPiSetupGpio ();                   // setup for laser control
 	pinMode (21, OUTPUT);
-	setLaserOff();	
 	
 	// init pwm driver which will handle both pwm outputs being used
 	pwm.initPWM(PWM_HAT_ADDRESS);			// default i2c hat address
@@ -163,38 +162,38 @@ void ServoUpdater::updateServos() {
 	
 		
 	// clamp to finish move if we're close
-	if (getStepFromPos(fabs(distA)) - MIN_STEP < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
+	if (getStepFromPosA(fabs(distA)) - MIN_STEP_A < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
 		curPosA = destPosA;
 //		cout << "Arrived A" << endl;
 	}
 	
-	if (getStepFromPos(fabs(distB)) - MIN_STEP < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
+	if (getStepFromPosB(fabs(distB)) - MIN_STEP_B < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
 		curPosB = destPosB;
 //		cout << "Arrived B" << endl;
 	}	
 	
-	if (getStepFromPos(fabs(distC)) - MIN_STEP < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
+	if (getStepFromPosC(fabs(distC)) - MIN_STEP_C < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
 		curPosC = destPosC;
 //		cout << "Arrived B" << endl;
 	}	
 
-	if (getStepFromPos(fabs(distD)) - MIN_STEP < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
+	if (getStepFromPosD(fabs(distD)) - MIN_STEP_D < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
 		curPosD = destPosD;
 //		cout << "Arrived B" << endl;
 	}	
 
-	if (getStepFromPos(fabs(distE)) - MIN_STEP < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
+	if (getStepFromPosE(fabs(distE)) - MIN_STEP_E < (destSpeed * (STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED)) + STEPS_SLOWEST_SPEED) {
 		curPosE = destPosE;
 //		cout << "Arrived B" << endl;
 	}	
 	
 		// calculate distance to move this cycle in steps
 	double cyclDist = ((STEPS_FASTEST_SPEED - STEPS_SLOWEST_SPEED) * destSpeed) + STEPS_SLOWEST_SPEED;
-	double stepA = getStepFromPos(curPosA);
-	double stepB = getStepFromPos(curPosB);
-	double stepC = getStepFromPos(curPosC);
-	double stepD = getStepFromPos(curPosD);
-	double stepE = getStepFromPos(curPosE);					
+	double stepA = getStepFromPosA(curPosA);
+	double stepB = getStepFromPosB(curPosB);
+	double stepC = getStepFromPosC(curPosC);
+	double stepD = getStepFromPosD(curPosD);
+	double stepE = getStepFromPosE(curPosE);					
 
 	// if pan has farther to go
 	if ((fabs(distA) >= fabs(distB)) && 
@@ -235,47 +234,47 @@ void ServoUpdater::updateServos() {
 		// positive direction case - move pan the full amount
 		// skip moving if we are there already
 		if (curPosA != destPosA) {
-			curPosA = getPosFromStep(stepA + ((distA/dist)*cyclDist));
+			curPosA = getPosFromStepA(stepA + ((distA/dist)*cyclDist));
 		}			
 		if (curPosB != destPosB) {
-			curPosB = getPosFromStep(stepB + ((distB/dist)*cyclDist));	// should take care of the sign automatically
+			curPosB = getPosFromStepB(stepB + ((distB/dist)*cyclDist));	// should take care of the sign automatically
 		}			
 		if (curPosC != destPosC) {
-			curPosC = getPosFromStep(stepC + ((distC/dist)*cyclDist));	// should take care of the sign automatically
+			curPosC = getPosFromStepC(stepC + ((distC/dist)*cyclDist));	// should take care of the sign automatically
 		}			
 		if (curPosD != destPosD) {
-			curPosD = getPosFromStep(stepD + ((distD/dist)*cyclDist));	// should take care of the sign automatically
+			curPosD = getPosFromStepD(stepD + ((distD/dist)*cyclDist));	// should take care of the sign automatically
 		}			
 		if (curPosE != destPosE) {
-			curPosE = getPosFromStep(stepB + ((distE/dist)*cyclDist));	// should take care of the sign automatically
+			curPosE = getPosFromStepE(stepE + ((distE/dist)*cyclDist));	// should take care of the sign automatically
 		}									
 		
 	} else {
 		// Negative direction case
 		if (curPosA != destPosA) {		
-			curPosA = getPosFromStep(stepA - ((distA/dist)*cyclDist));
+			curPosA = getPosFromStepA(stepA - ((distA/dist)*cyclDist));
 		}			
 		if (curPosB != destPosB) {
-			curPosB = getPosFromStep(stepB - ((distB/dist)*cyclDist));	// should take care of the sign automatically
+			curPosB = getPosFromStepB(stepB - ((distB/dist)*cyclDist));	// should take care of the sign automatically
 		}
 		if (curPosC != destPosC) {
-			curPosC = getPosFromStep(stepC - ((distC/dist)*cyclDist));	// should take care of the sign automatically
+			curPosC = getPosFromStepC(stepC - ((distC/dist)*cyclDist));	// should take care of the sign automatically
 		}			
 		if (curPosD != destPosD) {
-			curPosD = getPosFromStep(stepD - ((distD/dist)*cyclDist));	// should take care of the sign automatically
+			curPosD = getPosFromStepD(stepD - ((distD/dist)*cyclDist));	// should take care of the sign automatically
 		}			
 		if (curPosE != destPosE) {
-			curPosE = getPosFromStep(stepE - ((distE/dist)*cyclDist));	// should take care of the sign automatically
+			curPosE = getPosFromStepE(stepE - ((distE/dist)*cyclDist));	// should take care of the sign automatically
 		}			
 		
 	}
 		
 	// and finally write the corPos in Steps values to the pwm driver
-	pwm.setPWM(0,0x00, getStepFromPos(curPosA));				
-	pwm.setPWM(1,0x00, getStepFromPos(curPosB));
-	pwm.setPWM(2,0x00, getStepFromPos(curPosC));
-	pwm.setPWM(3,0x00, getStepFromPos(curPosD));
-	pwm.setPWM(4,0x00, getStepFromPos(curPosE));
+	pwm.setPWM(0,0x00, getStepFromPosA(curPosA));				
+	pwm.setPWM(1,0x00, getStepFromPosB(curPosB));
+	pwm.setPWM(2,0x00, getStepFromPosC(curPosC));
+	pwm.setPWM(3,0x00, getStepFromPosD(curPosD));
+	pwm.setPWM(4,0x00, getStepFromPosE(curPosE));
 	
 	if ((curPosA == destPosA) && (curPosB == destPosB) && (curPosC == destPosC) && (curPosD == destPosD) && (curPosE == destPosE) && !moveComplete) {
 		
@@ -291,14 +290,52 @@ void ServoUpdater::updateServos() {
 }
 
 
-double ServoUpdater::getStepFromPos(double pos) {
-	double val = ((MAX_STEP - MIN_STEP)*pos) + MIN_STEP;
+double ServoUpdater::getStepFromPosA(double pos) {
+	double val = ((MAX_STEP_A - MIN_STEP_A)*pos) + MIN_STEP_A;
+	return(val);
+}
+double ServoUpdater::getPosFromStepA(double step) {
+	double val = (step - MIN_STEP_A) / (MAX_STEP_A - MIN_STEP_A);
 	return(val);
 }
 
 
-double ServoUpdater::getPosFromStep(double step) {
-	double val = (step - MIN_STEP) / (MAX_STEP - MIN_STEP);
+double ServoUpdater::getStepFromPosB(double pos) {
+	double val = ((MAX_STEP_B - MIN_STEP_B)*pos) + MIN_STEP_B;
+	return(val);
+}
+double ServoUpdater::getPosFromStepB(double step) {
+	double val = (step - MIN_STEP_B) / (MAX_STEP_B - MIN_STEP_B);
+	return(val);
+}
+
+
+double ServoUpdater::getStepFromPosC(double pos) {
+	double val = ((MAX_STEP_C - MIN_STEP_C)*pos) + MIN_STEP_C;
+	return(val);
+}
+double ServoUpdater::getPosFromStepC(double step) {
+	double val = (step - MIN_STEP_C) / (MAX_STEP_C - MIN_STEP_C);
+	return(val);
+}
+
+
+double ServoUpdater::getStepFromPosD(double pos) {
+	double val = ((MAX_STEP_D - MIN_STEP_D)*pos) + MIN_STEP_D;
+	return(val);
+}
+double ServoUpdater::getPosFromStepD(double step) {
+	double val = (step - MIN_STEP_D) / (MAX_STEP_D - MIN_STEP_D);
+	return(val);
+}
+
+
+double ServoUpdater::getStepFromPosE(double pos) {
+	double val = ((MAX_STEP_E - MIN_STEP_E)*pos) + MIN_STEP_E;
+	return(val);
+}
+double ServoUpdater::getPosFromStepE(double step) {
+	double val = (step - MIN_STEP_E) / (MAX_STEP_E - MIN_STEP_E);
 	return(val);
 }
 
@@ -394,17 +431,6 @@ bool ServoUpdater::getRunning() {
 	return(x);	
 }
 
-void ServoUpdater::setLaserOn() {
-	pthread_mutex_lock(&lock);
-    digitalWrite (21, HIGH);
-	pthread_mutex_unlock(&lock);
-}
-
-void ServoUpdater::setLaserOff() {
-	pthread_mutex_lock(&lock);	
-    digitalWrite(21, LOW);
-	pthread_mutex_unlock(&lock);    
-}
 
 	
 

@@ -44,7 +44,6 @@ void DrinkRobot::startUp() {
 	
 	sUpdater.stop();				// kill the updater thread
 	cout << "exiting.." << endl;
-	sUpdater.setLaserOff();
 	exit(0);						// exit the application
 	
 }
