@@ -41,11 +41,17 @@ ServoUpdater::ServoUpdater() {
 		
 	curPosA = 0.5;
 	curPosB = 0.5;
+	curPosC = 0.5;	
+	curPosD = 0.5;	
+	curPosE = 0.5;	
 	destPosA = 0.5;
 	destPosB = 0.5;
+	destPosC = 0.5;
+	destPosD = 0.5;
+	destPosE = 0.5;
+	
 	destSpeed = 0.5;
 	
-
 	delayMicroseconds(450000);				// delay 450ms	
 	moveComplete = true;
 
@@ -121,12 +127,15 @@ void ServoUpdater::updater() {
 	
 }
 
-void ServoUpdater::goToPos(double posA, double posB, double speed, double pause) {
+void ServoUpdater::goToPos(double posA, double posB, double posC, double posD, double posE, double speed, double pause) {
 	
 	pthread_mutex_lock(&lock);
 
 	destPosA = posA;
 	destPosB = posB;
+	destPosC = posC;
+	destPosD = posD;
+	destPosE = posE;
 	destSpeed = speed;
 	destPause = pause;
 

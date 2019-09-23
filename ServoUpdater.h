@@ -18,7 +18,7 @@ class ServoUpdater {
 	ServoUpdater();
 	void start();
 	void stop();
-	void goToPos(double posA, double posB, double speed, double pause);	
+	void goToPos(double posA, double posB, double posC, double posD, double posE, double speed, double pause);	
 	double getStepFromPos(double pos);
 	double getPosFromStep(double step);
 

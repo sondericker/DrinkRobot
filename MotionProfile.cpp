@@ -15,11 +15,15 @@ MotionProfile::MotionProfile() {
 }
 
 
-void MotionProfile::addStep(double panPos, double tiltPos, double stepSpeed, double stepPause) {
+void MotionProfile::addStep(double inPosA, double inPosB, double inPosC, double inPosD, double inPosE, double stepSpeed, double stepPause) {
 	cout << "Into add step\n";
 	
-	pan[numSteps] = panPos;
-	tilt[numSteps] = tiltPos;
+	posA[numSteps] = inPosA;
+	posB[numSteps] = inPosB;
+	posC[numSteps] = inPosC;
+	posD[numSteps] = inPosD;
+	posE[numSteps] = inPosE;
+	
 	speed[numSteps] = stepSpeed;
 	pause[numSteps] = stepPause;
 	numSteps++;

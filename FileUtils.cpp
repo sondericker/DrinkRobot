@@ -46,13 +46,31 @@ void FileUtils::loadProfile(MotionProfile* mp) {
 			d = strtod(tmp.c_str(), NULL);
 			cout << "Double val: " << right << showpoint << d << endl;
 			it++;
-			mp->pan[stepCounter] = d;
+			mp->posA[stepCounter] = d;
 			
 			tmp = *it;
 			d = strtod(tmp.c_str(), NULL);
 			cout << "Double val: " << right << showpoint << d << endl;
 			it++;
-			mp->tilt[stepCounter] = d;	
+			mp->posB[stepCounter] = d;	
+
+			tmp = *it;
+			d = strtod(tmp.c_str(), NULL);
+			cout << "Double val: " << right << showpoint << d << endl;
+			it++;
+			mp->posC[stepCounter] = d;	
+
+			tmp = *it;
+			d = strtod(tmp.c_str(), NULL);
+			cout << "Double val: " << right << showpoint << d << endl;
+			it++;
+			mp->posD[stepCounter] = d;	
+
+			tmp = *it;
+			d = strtod(tmp.c_str(), NULL);
+			cout << "Double val: " << right << showpoint << d << endl;
+			it++;
+			mp->posE[stepCounter] = d;	
 					
 			tmp = *it;
 			d = strtod(tmp.c_str(), NULL);
@@ -95,14 +113,15 @@ void FileUtils::saveProfile(MotionProfile mp) {
 	
    ofstream oFile ( "/home/pi/Projects/CatToy/profile.csv" ); 				// declare file stream: http://www.cplusplus.com/reference/iostream/ofstream/
 	
-
 	for (int x=0; x < mp.numSteps; x++) {
 		
-		oFile << to_string(mp.pan[x]) << "," <<
-			to_string(mp.tilt[x]) << "," <<
+		oFile << to_string(mp.posA[x]) << "," <<
+			to_string(mp.posB[x]) << "," <<
+			to_string(mp.posC[x]) << "," <<
+			to_string(mp.posD[x]) << "," <<
+			to_string(mp.posE[x]) << "," <<			
 			to_string(mp.speed[x]) << "," <<
 			to_string(mp.pause[x]) << endl;
-					
 	}
 	
 	oFile.close();
