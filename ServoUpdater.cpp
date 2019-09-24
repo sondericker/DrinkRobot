@@ -434,24 +434,8 @@ bool ServoUpdater::getRunning() {
 
 bool ServoUpdater::getButtonState() {
 	
-    wiringPiSetupGpio ();                   // setup for button read
-	pinMode(BUTTON_PIN, INPUT);
-	
-	for (int x=0; x<20; x++) {
-			pinMode(x, INPUT);
-	}
-	
-	for (int x=0; x<20; x++) {
-	cout << "button state:" << digitalRead(x) << " button pin:" << x << endl;
-		
-		
-	}
-	
-	
-//	pullUpDnControl (BUTTON_PIN, PUD_UP);		
-	
 	// read pin
-	cout << "button state:" << digitalRead(BUTTON_PIN) << " button pin:" << BUTTON_PIN << endl;
+//	cout << "button state:" << digitalRead(BUTTON_PIN) << " button pin:" << BUTTON_PIN << endl;
 	if (digitalRead(BUTTON_PIN)) {
 //		cout << "Button not pushed!" << endl;
 		return(false);
