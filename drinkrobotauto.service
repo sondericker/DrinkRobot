@@ -1,0 +1,9 @@
+[Unit]
+Description=Drink Robot service.
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/pi/Projects/DrinkRobot/start.sh
+
+[Install]
+WantedBy=multi-user.target

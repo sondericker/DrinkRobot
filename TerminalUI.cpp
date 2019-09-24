@@ -489,6 +489,7 @@ void TerminalUI::autoRunUI() {
 	while(true) {
 		
 		// wait for the button to be pressed. Poll every ms
+		cout << "Waiting for button press.." << endl;
 		while (!sUpdater->getButtonState()) {
 			nanosleep(&tp, NULL);
 		}
@@ -498,9 +499,10 @@ void TerminalUI::autoRunUI() {
 		for (int x = 0; x < mProfile.numSteps; x++) {
 			
 			sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
-			cout << "Moving to step:" << x << " pan:" << mProfile.posA[x] <<
-			 " tilt:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
-			  " for pause:" << mProfile.pause[x] << endl;
+			cout << "Moving to step:" << x << " posA:" << mProfile.posA[x] <<
+			" posB:" << mProfile.posB[x]  << " posC:" << mProfile.posC[x]  << 
+			" posD:" << mProfile.posD[x]  << " posE:" << mProfile.posE[x]  << 
+			" at speed:" << mProfile.speed[x]  << " for pause:" << mProfile.pause[x] << endl;						  
 			  
 			while(!sUpdater->getmoveComplete()) {						
 				nanosleep(&tp, NULL);						
