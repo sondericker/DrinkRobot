@@ -435,9 +435,9 @@ bool ServoUpdater::getRunning() {
 bool ServoUpdater::getButtonState() {
 	
 	// read pin
-	cout << "button state:" << digitalRead(BUTTON_PIN) << endl;
+//	cout << "button state:" << digitalRead(BUTTON_PIN) << endl;
 	if (digitalRead(BUTTON_PIN)) {
-		cout << "Button not pushed!" << endl;
+//		cout << "Button not pushed!" << endl;
 		return(false);
 	} else {
 		cout << "Button pushed!" << endl;
@@ -446,10 +446,3 @@ bool ServoUpdater::getButtonState() {
 	
 }
 	
-
-
-
-
-
-
-

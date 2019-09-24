@@ -23,7 +23,7 @@
 #define MIN_STEP_E 210.0
 #define MAX_STEP_E 1010.0
 
-#define BUTTON_PIN 21
+#define BUTTON_PIN 0
 
 
 class ServoUpdater {
