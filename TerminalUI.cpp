@@ -181,12 +181,13 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 
 	system("clear");
 
-	cout << "Use a:d, w:s, r:f. t:g, y:h to move arm into position and e to set. Enter to go to next step" << endl;
+	cout << "Use a:d, w:s, r:f. t:g, y:h to move arm into position and e to set. Enter to go to next step" << endl << endl;
 	
 //	sUpdater->setLaserOn();
 	
 	// Set terminal to raw mode 
-	system("stty raw"); 
+//	system("stty raw"); 
+	system("echo off");
 	//sUpdater.goToPos(0.5, 0.5, 1.0); 		// center the laser
 	// Loop while the laser is driven around
 	
@@ -203,8 +204,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'd':
 			x = sUpdater->getStepFromPosA(sUpdater->getdestPosA());
 			if (x < MAX_STEP_A) x = x + MANUAL_STEP; 	
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getPosFromStepA(x), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				sUpdater->getdestPosD(), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);				
 			break;
@@ -212,8 +211,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'a':
 			x = sUpdater->getStepFromPosA(sUpdater->getdestPosA());
 			if (x > MIN_STEP_A) x = x - MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getPosFromStepA(x), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				sUpdater->getdestPosD(), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 								
@@ -222,8 +219,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 's':
 			x = sUpdater->getStepFromPosB(sUpdater->getdestPosB());
 			if (x < MAX_STEP_B) x = x + MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getPosFromStepB(x), sUpdater->getdestPosC(), 
 				sUpdater->getdestPosD(), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -231,8 +226,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'w':
 			x = sUpdater->getStepFromPosB(sUpdater->getdestPosB());
 			if (x > MIN_STEP_B) x = x - MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getPosFromStepB(x), sUpdater->getdestPosC(),  
 				sUpdater->getdestPosD(),  sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -240,8 +233,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'f':
 			x = sUpdater->getStepFromPosC(sUpdater->getdestPosC());
 			if (x < MAX_STEP_C) x = x + MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getPosFromStepC(x),  
 				sUpdater->getdestPosD(), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;		
@@ -249,8 +240,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'r':
 			x = sUpdater->getStepFromPosC(sUpdater->getdestPosC());
 			if (x > MIN_STEP_C) x = x - MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getPosFromStepC(x),  
 				sUpdater->getdestPosD(),  sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -258,8 +247,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'g':
 			x = sUpdater->getStepFromPosD(sUpdater->getdestPosD());
 			if (x < MAX_STEP_D) x = x + MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				sUpdater->getPosFromStepD(x), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;		
@@ -267,8 +254,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 't':
 			x = sUpdater->getStepFromPosD(sUpdater->getdestPosD());
 			if (x > MIN_STEP_D) x = x - MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(),
 				sUpdater->getPosFromStepD(x), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -276,8 +261,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'h':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x < MAX_STEP_E) x = x + MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				 sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;		
@@ -285,8 +268,6 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'y':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x > MIN_STEP_E) x = x - MANUAL_STEP;
-//			cout << "Step = " << x << endl;
-
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(),
 				sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -296,6 +277,7 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			double spd, pause;
 			
 			system("stty cooked"); 	
+			system("echo on");
 			cout << endl << endl;			
 			cout << "Enter speed (0.0 - 1.0):";
 			cin >> mInput;
@@ -308,7 +290,8 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			mProfile.editStep(sUpdater->getcurPosA(), sUpdater->getcurPosB(), sUpdater->getcurPosC(), 
 				sUpdater->getcurPosD(), sUpdater->getcurPosE(), spd, pause, stepNum);
 			cout << "step edited. numSteps =" << mProfile.numSteps << endl;
-			system("stty raw"); 
+			system("stty raw");
+			system("echo off"); 
 			running = false;
 			break;
 			
@@ -324,6 +307,7 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 	}
 
 	// Reset terminal to normal "cooked" mode 
+	system("echo on"); 
 	system("stty cooked"); 	
 	
 	// clean up the screen	
@@ -344,19 +328,13 @@ void TerminalUI::printMenu() {
 	cout << "s - Save profile" << endl;
 	cout << "l - Load profile" << endl;
 	cout << "q - quit program" << endl;
-	cout << "1 - Test1" << endl;
-	cout << "2 - Test2" << endl;
-	cout << "3 - Test3" << endl;
-	cout << "4 - Test4" << endl;
-	
+
 }
 
 char TerminalUI::getCommand() {
 	
 	string inText;
-	
 	printMenu();
-	
 	
 	while (true) {
 		
@@ -372,22 +350,19 @@ char TerminalUI::getCommand() {
 				(inText.front() == 'e') ||			
 				(inText.front() == 'p') ||
 				(inText.front() == 'c') ||
-				(inText.front() == 'r') ||
 				(inText.front() == 't') ||
-			
 				(inText.front() == 's') ||
 				(inText.front() == '1') ||
 				(inText.front() == '2') ||
 				(inText.front() == '3') ||
 				(inText.front() == '4') ||
-				
 				(inText.front() == 'q') ||
 				(inText.front() == 'l')) {
 				return(inText.front());
 			}
 		}		
 			
-		cout << "Invalid command. Valid options are m, e, p, c, r, t, s, q and l" << endl;
+		cout << "Invalid command. Valid options are m, e, p, c, t, s, q and l" << endl;
 			
 	}
 				

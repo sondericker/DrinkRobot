@@ -32,8 +32,8 @@ using namespace std;
 ServoUpdater::ServoUpdater() {
 	
     wiringPiSetupGpio ();                   // setup for button read
-	pinMode (BUTTON_PIN, INPUT);
-	
+	pinMode(BUTTON_PIN, INPUT);
+	pullUpDnControl (BUTTON_PIN, PUD_UP);	
 	// init pwm driver which will handle both pwm outputs being used
 	pwm.initPWM(PWM_HAT_ADDRESS);			// default i2c hat address
 	pwm.setPWMFreq(PWM_FREQ);		// run the PWM at 100Hz	
@@ -138,7 +138,8 @@ void ServoUpdater::goToPos(double posA, double posB, double posC, double posD, d
 	destSpeed = speed;
 	destPause = pause;
 
-//	cout << " CALLED destPosA = " << destPosA << " destPosB = " << destPosB << endl << endl;
+//	cout << "Command - goToPos: destPosA = " << destPosA << " destPosB = " << destPosB << " destPosC = " << destPosC 
+//	<< " destPosD = " << destPosD << " destPosE = " << destPosE << " destSpeed = " << destSpeed << " destPause = " << destPause << endl;
 
 	moveComplete = false;
 
@@ -434,7 +435,9 @@ bool ServoUpdater::getRunning() {
 bool ServoUpdater::getButtonState() {
 	
 	// read pin
-	if (digitalRead(BUTTON_PIN) == HIGH) {
+	cout << "button state:" << digitalRead(BUTTON_PIN) << endl;
+	if (digitalRead(BUTTON_PIN)) {
+		cout << "Button not pushed!" << endl;
 		return(false);
 	} else {
 		cout << "Button pushed!" << endl;
@@ -443,6 +446,8 @@ bool ServoUpdater::getButtonState() {
 	
 }
 	
+
+
 
 
 
