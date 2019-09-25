@@ -1,27 +1,27 @@
 
 
-#define UPDATER_FREQUENCY_HZ	   	100		// frequency the updater runs at
+#define UPDATER_FREQUENCY_HZ	50			// frequency the updater runs at
 #define PWM_HAT_ADDRESS 		0x40		// address of PWM hat hardware
-#define PWM_FREQ			100		// 10ms
+#define PWM_FREQ				50			// 20ms
 
 #include <pthread.h>
 #include "PWMDriver.h"
 
 #define STEPS_SLOWEST_SPEED 0.1
-#define STEPS_FASTEST_SPEED 5.0
+#define STEPS_FASTEST_SPEED 10.0
 //#define MIN_STEP 210.0
 //#define MAX_STEP 1010.0
 
-#define MIN_STEP_A 210.0
-#define MAX_STEP_A 1010.0
-#define MIN_STEP_B 210.0
-#define MAX_STEP_B 1010.0
-#define MIN_STEP_C 210.0
-#define MAX_STEP_C 1010.0
-#define MIN_STEP_D 210.0
-#define MAX_STEP_D 1010.0
-#define MIN_STEP_E 210.0
-#define MAX_STEP_E 1010.0
+#define MIN_STEP_A 105.0
+#define MAX_STEP_A 505.0
+#define MIN_STEP_B 105.0
+#define MAX_STEP_B 505.0
+#define MIN_STEP_C 105.0
+#define MAX_STEP_C 505.0
+#define MIN_STEP_D 105.0
+#define MAX_STEP_D 505.0
+#define MIN_STEP_E 105.0
+#define MAX_STEP_E 505.0
 
 #define BUTTON_PIN 20
 
