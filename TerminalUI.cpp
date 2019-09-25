@@ -59,7 +59,7 @@ void TerminalUI::driveAndAddPoints() {
 								
 			break;			
 			
-			case 's':
+			case 'w':
 			x = sUpdater->getStepFromPosB(sUpdater->getdestPosB());
 			if (x < MAX_STEP_B) x = x + MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -70,7 +70,7 @@ void TerminalUI::driveAndAddPoints() {
 			
 
 			
-			case 'w':
+			case 's':
 			x = sUpdater->getStepFromPosB(sUpdater->getdestPosB());
 			if (x > MIN_STEP_B) x = x - MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -99,7 +99,7 @@ void TerminalUI::driveAndAddPoints() {
 				
 			break;
 			
-			case 'g':
+			case 't':
 			x = sUpdater->getStepFromPosD(sUpdater->getdestPosD());
 			if (x < MAX_STEP_D) x = x + MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -108,7 +108,7 @@ void TerminalUI::driveAndAddPoints() {
 				sUpdater->getPosFromStepD(x), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;		
 
-			case 't':
+			case 'g':
 			x = sUpdater->getStepFromPosD(sUpdater->getdestPosD());
 			if (x > MIN_STEP_D) x = x - MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -118,7 +118,7 @@ void TerminalUI::driveAndAddPoints() {
 				
 			break;
 
-			case 'h':
+			case 'y':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x < MAX_STEP_E) x = x + MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -127,7 +127,7 @@ void TerminalUI::driveAndAddPoints() {
 				 sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;		
 
-			case 'y':
+			case 'h':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x > MIN_STEP_E) x = x - MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -186,9 +186,8 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 //	sUpdater->setLaserOn();
 	
 	// Set terminal to raw mode 
-//	system("stty raw"); 
-	system("echo off");
-	//sUpdater.goToPos(0.5, 0.5, 1.0); 		// center the laser
+	system("stty raw"); 
+//	system("echo off");
 	// Loop while the laser is driven around
 	
 	

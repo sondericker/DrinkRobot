@@ -38,16 +38,22 @@ ServoUpdater::ServoUpdater() {
 	pwm.initPWM(PWM_HAT_ADDRESS);			// default i2c hat address
 	pwm.setPWMFreq(PWM_FREQ);		// run the PWM at 100Hz	
 		
-	curPosA = 0.5;
-	curPosB = 0.5;
-	curPosC = 0.5;	
-	curPosD = 0.5;	
-	curPosE = 0.5;	
-	destPosA = 0.5;
-	destPosB = 0.5;
-	destPosC = 0.5;
-	destPosD = 0.5;
-	destPosE = 0.5;
+	curPosA = NEUTRAL_POSA;
+	curPosB = NEUTRAL_POSB;
+	curPosC = NEUTRAL_POSC;	
+	curPosD = NEUTRAL_POSD;	
+	curPosE = NEUTRAL_POSE;	
+	destPosA = curPosA;
+	destPosB = curPosB;
+	destPosC = curPosC;
+	destPosD = curPosD;
+	destPosE = curPosE;
+	
+	pwm.setPWM(0,0x00, getStepFromPosA(curPosA));				
+	pwm.setPWM(1,0x00, getStepFromPosB(curPosB));
+	pwm.setPWM(2,0x00, getStepFromPosC(curPosC));
+	pwm.setPWM(3,0x00, getStepFromPosD(curPosD));
+	pwm.setPWM(4,0x00, getStepFromPosE(curPosE));	
 	
 	destSpeed = 0.5;
 	
