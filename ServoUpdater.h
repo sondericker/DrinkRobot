@@ -5,11 +5,10 @@
 #define PWM_FREQ				50			// 20ms
 
 #define NEUTRAL_POSA .5
-#define NEUTRAL_POSB .59
-#define NEUTRAL_POSC .43
-#define NEUTRAL_POSD .9
-#define NEUTRAL_POSE .5
-
+#define NEUTRAL_POSB .955
+#define NEUTRAL_POSC .895
+#define NEUTRAL_POSD 1.0
+#define NEUTRAL_POSE .48
 
 #include <pthread.h>
 #include "PWMDriver.h"

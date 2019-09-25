@@ -15,7 +15,8 @@ using namespace std;
 TerminalUI::TerminalUI(ServoUpdater* sUp) {
 
 	sUpdater = sUp;	
-	
+	FileUtils fileU;
+	fileU.loadProfile(&mProfile);
 }
 
 
@@ -325,7 +326,7 @@ void TerminalUI::printMenu() {
 	cout << "c - Clear profile" << endl;
 	cout << "t - Test profile" << endl;	
 	cout << "s - Save profile" << endl;
-	cout << "l - Load profile" << endl;
+//	cout << "l - Load profile" << endl;
 	cout << "q - quit program" << endl;
 
 }
@@ -355,13 +356,13 @@ char TerminalUI::getCommand() {
 				(inText.front() == '2') ||
 				(inText.front() == '3') ||
 				(inText.front() == '4') ||
-				(inText.front() == 'q') ||
-				(inText.front() == 'l')) {
+				(inText.front() == 'q')) 
+			{
 				return(inText.front());
 			}
 		}		
 			
-		cout << "Invalid command. Valid options are m, e, p, c, t, s, q and l" << endl;
+		cout << "Invalid command. Valid options are m, e, p, c, t, s, and q" << endl;
 			
 	}
 				
@@ -444,9 +445,9 @@ void TerminalUI::runUI() {
 				cout << "Motion Profile Saved." << endl;			
 				break;
 
-			case 'l':		
-				fileU.loadProfile(&mProfile);
-				cout << "Motion Profile Loaded." << endl;						
+//			case 'l':		
+//				fileU.loadProfile(&mProfile);
+//				cout << "Motion Profile Loaded." << endl;						
 				break;
 
 			case 'q':
