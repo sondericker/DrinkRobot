@@ -10,6 +10,9 @@
 #define NEUTRAL_POSD 1.0
 #define NEUTRAL_POSE .48
 
+#define LOW_CENTER_VAL 	0.495		// low value for which the continuous servo is turned off
+#define HIGH_CENTER_VAL	0.505		// high value for which the continuous servo is turned off
+
 #include <pthread.h>
 #include "PWMDriver.h"
 

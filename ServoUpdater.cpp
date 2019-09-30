@@ -283,7 +283,12 @@ void ServoUpdater::updateServos() {
 		pwm.setPWM(1,0x00, getStepFromPosB(curPosB));
 		pwm.setPWM(2,0x00, getStepFromPosC(curPosC));
 		pwm.setPWM(3,0x00, getStepFromPosD(curPosD));
-		pwm.setPWM(4,0x00, getStepFromPosE(curPosE));
+		
+		if ((curPosE>=LOW_CENTER_VAL)&&(curPosE<=HIGH_CENTER_VAL)) {
+			pwm.setPWM(4, 0x00, 0x00);		// turn off motor in the center
+		} else {
+			pwm.setPWM(4, 0x00, getStepFromPosE(curPosE));
+		}
 	}
 	
 	if ((curPosA == destPosA) && (curPosB == destPosB) && (curPosC == destPosC) && (curPosD == destPosD) && (curPosE == destPosE) && !moveComplete) {

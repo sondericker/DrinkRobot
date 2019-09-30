@@ -122,6 +122,7 @@ void TerminalUI::driveAndAddPoints() {
 			case 'y':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x < MAX_STEP_E) x = x + MANUAL_STEP;
+			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;			
 //			cout << "Step = " << x << endl;
 
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
@@ -131,6 +132,7 @@ void TerminalUI::driveAndAddPoints() {
 			case 'h':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x > MIN_STEP_E) x = x - MANUAL_STEP;
+			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;			
 //			cout << "Step = " << x << endl;
 
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(),
@@ -183,13 +185,13 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 	system("clear");
 
 	cout << "Use a:d, w:s, r:f. t:g, y:h to move arm into position and e to set. Enter to go to next step" << endl << endl;
-	
-//	sUpdater->setLaserOn();
+	cout << "Moving to step:" << stepNum << " posA:" << mProfile.posA[stepNum] <<
+		" posB:" << mProfile.posB[stepNum]  << " posC:" << mProfile.posC[stepNum]  << 
+		" posD:" << mProfile.posD[stepNum]  << " posE:" << mProfile.posE[stepNum]  << 
+		" at speed:" << mProfile.speed[stepNum]  << " for pause:" << mProfile.pause[stepNum] << endl;	
 	
 	// Set terminal to raw mode 
 	system("stty raw"); 
-//	system("echo off");
-	// Loop while the laser is driven around
 	
 	
 	
@@ -261,6 +263,7 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'h':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x < MAX_STEP_E) x = x + MANUAL_STEP;
+//			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				 sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;		
@@ -268,6 +271,7 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'y':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x > MIN_STEP_E) x = x - MANUAL_STEP;
+//			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;			
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(),
 				sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -530,9 +534,10 @@ void TerminalUI::editProfile() {
 	for (int x=0; x<mProfile.numSteps; x++) {
 		
 		sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
-		cout << "Moving to step:" << x << " pan:" << mProfile.posA[x] <<
-			" tilt:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
-			" for pause:" << mProfile.pause[x] << endl;
+		cout << "Moving to step:" << x << " posA:" << mProfile.posA[x] <<
+			" posB:" << mProfile.posB[x]  << " posC:" << mProfile.posC[x]  << 
+			" posD:" << mProfile.posD[x]  << " posE:" << mProfile.posE[x]  << 
+			" at speed:" << mProfile.speed[x]  << " for pause:" << mProfile.pause[x] << endl;
 							  
 		while(!sUpdater->getmoveComplete()) {						
 			nanosleep(&tp, NULL);						
