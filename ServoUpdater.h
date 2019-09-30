@@ -66,6 +66,8 @@ class ServoUpdater {
 	double getcurPosE();			// tilt current position			
 	bool getmoveComplete();	
 	bool getRunning();
+	bool getPWMRunState();
+	void setPWMRunState(bool x);
 
 	protected:
 	
@@ -75,6 +77,7 @@ class ServoUpdater {
 	void updateServos();					// method to actually update servo pwms
 	pthread_t myThread;
 	PWMDriver pwm;	
+	bool pwmRunState;
 	bool running;
 	pthread_mutex_t lock;
 	

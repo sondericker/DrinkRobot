@@ -490,11 +490,18 @@ void TerminalUI::autoRunUI() {
 		
 		// wait for the button to be pressed. Poll every ms
 		cout << "Waiting for button press.." << endl;
+
+		// turn off the motors while we wait				
+		sUpdater->setPWMRunState(false);
+
 		while (!sUpdater->getButtonState()) {
 			nanosleep(&tp, NULL);
 		}
 			
 		// Button was pushed, run profile
+		
+		// turn the motors on because it is time to move!
+		sUpdater->setPWMRunState(true);						
 		
 		for (int x = 0; x < mProfile.numSteps; x++) {
 			

@@ -54,7 +54,7 @@ ServoUpdater::ServoUpdater() {
 	pwm.setPWM(2,0x00, getStepFromPosC(curPosC));
 	pwm.setPWM(3,0x00, getStepFromPosD(curPosD));
 	pwm.setPWM(4,0x00, getStepFromPosE(curPosE));	
-	
+	setPWMRunState(true);
 	destSpeed = 0.5;
 	
 	delayMicroseconds(450000);				// delay 450ms	
@@ -277,11 +277,14 @@ void ServoUpdater::updateServos() {
 	}
 		
 	// and finally write the corPos in Steps values to the pwm driver
-	pwm.setPWM(0,0x00, getStepFromPosA(curPosA));				
-	pwm.setPWM(1,0x00, getStepFromPosB(curPosB));
-	pwm.setPWM(2,0x00, getStepFromPosC(curPosC));
-	pwm.setPWM(3,0x00, getStepFromPosD(curPosD));
-	pwm.setPWM(4,0x00, getStepFromPosE(curPosE));
+	
+	if (pwmRunState == true) {
+		pwm.setPWM(0,0x00, getStepFromPosA(curPosA));				
+		pwm.setPWM(1,0x00, getStepFromPosB(curPosB));
+		pwm.setPWM(2,0x00, getStepFromPosC(curPosC));
+		pwm.setPWM(3,0x00, getStepFromPosD(curPosD));
+		pwm.setPWM(4,0x00, getStepFromPosE(curPosE));
+	}
 	
 	if ((curPosA == destPosA) && (curPosB == destPosB) && (curPosC == destPosC) && (curPosD == destPosD) && (curPosE == destPosE) && !moveComplete) {
 		
@@ -437,6 +440,23 @@ bool ServoUpdater::getRunning() {
 	pthread_mutex_unlock(&lock);
 	return(x);	
 }
+
+bool ServoUpdater::getPWMRunState() {
+	pthread_mutex_lock(&lock);
+	bool x = pwmRunState;
+	pthread_mutex_unlock(&lock);
+	return(x);	
+}
+
+void ServoUpdater::setPWMRunState(bool x) {
+	pthread_mutex_lock(&lock);
+	pwmRunState = x;
+	if (!pwmRunState) {
+		pwm.resetAllPWM(0,0);					// we set not PWMing so turn them off
+	}
+	pthread_mutex_unlock(&lock);
+}
+
 
 bool ServoUpdater::getButtonState() {
 	
