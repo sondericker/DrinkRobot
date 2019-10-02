@@ -33,7 +33,8 @@ ServoUpdater::ServoUpdater() {
 	
     wiringPiSetupGpio ();                   // setup for button read
 	pinMode(BUTTON_PIN, INPUT);
-//	pullUpDnControl (BUTTON_PIN, PUD_UP);	
+	pullUpDnControl (BUTTON_PIN, PUD_UP);	
+	
 	// init pwm driver which will handle both pwm outputs being used
 	pwm.initPWM(PWM_HAT_ADDRESS);			// default i2c hat address
 	pwm.setPWMFreq(PWM_FREQ);		// run the PWM at 100Hz	
