@@ -15,7 +15,8 @@ using namespace std;
 TerminalUI::TerminalUI(ServoUpdater* sUp) {
 
 	sUpdater = sUp;	
-	
+	FileUtils fileU;
+	fileU.loadProfile(&mProfile);
 }
 
 
@@ -59,7 +60,7 @@ void TerminalUI::driveAndAddPoints() {
 								
 			break;			
 			
-			case 's':
+			case 'w':
 			x = sUpdater->getStepFromPosB(sUpdater->getdestPosB());
 			if (x < MAX_STEP_B) x = x + MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -70,7 +71,7 @@ void TerminalUI::driveAndAddPoints() {
 			
 
 			
-			case 'w':
+			case 's':
 			x = sUpdater->getStepFromPosB(sUpdater->getdestPosB());
 			if (x > MIN_STEP_B) x = x - MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -99,7 +100,7 @@ void TerminalUI::driveAndAddPoints() {
 				
 			break;
 			
-			case 'g':
+			case 't':
 			x = sUpdater->getStepFromPosD(sUpdater->getdestPosD());
 			if (x < MAX_STEP_D) x = x + MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -108,7 +109,7 @@ void TerminalUI::driveAndAddPoints() {
 				sUpdater->getPosFromStepD(x), sUpdater->getdestPosE(), MANUAL_SPEED, NO_PAUSE);	
 			break;		
 
-			case 't':
+			case 'g':
 			x = sUpdater->getStepFromPosD(sUpdater->getdestPosD());
 			if (x > MIN_STEP_D) x = x - MANUAL_STEP;
 //			cout << "Step = " << x << endl;
@@ -118,18 +119,20 @@ void TerminalUI::driveAndAddPoints() {
 				
 			break;
 
-			case 'h':
+			case 'y':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x < MAX_STEP_E) x = x + MANUAL_STEP;
+			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;			
 //			cout << "Step = " << x << endl;
 
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				 sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;		
 
-			case 'y':
+			case 'h':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x > MIN_STEP_E) x = x - MANUAL_STEP;
+			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;			
 //			cout << "Step = " << x << endl;
 
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(),
@@ -182,14 +185,13 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 	system("clear");
 
 	cout << "Use a:d, w:s, r:f. t:g, y:h to move arm into position and e to set. Enter to go to next step" << endl << endl;
-	
-//	sUpdater->setLaserOn();
+	cout << "Moving to step:" << stepNum << " posA:" << mProfile.posA[stepNum] <<
+		" posB:" << mProfile.posB[stepNum]  << " posC:" << mProfile.posC[stepNum]  << 
+		" posD:" << mProfile.posD[stepNum]  << " posE:" << mProfile.posE[stepNum]  << 
+		" at speed:" << mProfile.speed[stepNum]  << " for pause:" << mProfile.pause[stepNum] << endl;	
 	
 	// Set terminal to raw mode 
-//	system("stty raw"); 
-	system("echo off");
-	//sUpdater.goToPos(0.5, 0.5, 1.0); 		// center the laser
-	// Loop while the laser is driven around
+	system("stty raw"); 
 	
 	
 	
@@ -261,6 +263,7 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'h':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x < MAX_STEP_E) x = x + MANUAL_STEP;
+//			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(), 
 				 sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;		
@@ -268,6 +271,7 @@ void TerminalUI::driveAndEditPoint(int stepNum) {
 			case 'y':
 			x = sUpdater->getStepFromPosE(sUpdater->getdestPosE());
 			if (x > MIN_STEP_E) x = x - MANUAL_STEP;
+//			cout << "EPos = " << sUpdater->getPosFromStepE(x) << endl;			
 			sUpdater->goToPos(sUpdater->getdestPosA(), sUpdater->getdestPosB(), sUpdater->getdestPosC(),
 				sUpdater->getdestPosD(), sUpdater->getPosFromStepE(x), MANUAL_SPEED, NO_PAUSE);	
 			break;
@@ -326,7 +330,7 @@ void TerminalUI::printMenu() {
 	cout << "c - Clear profile" << endl;
 	cout << "t - Test profile" << endl;	
 	cout << "s - Save profile" << endl;
-	cout << "l - Load profile" << endl;
+//	cout << "l - Load profile" << endl;
 	cout << "q - quit program" << endl;
 
 }
@@ -356,13 +360,13 @@ char TerminalUI::getCommand() {
 				(inText.front() == '2') ||
 				(inText.front() == '3') ||
 				(inText.front() == '4') ||
-				(inText.front() == 'q') ||
-				(inText.front() == 'l')) {
+				(inText.front() == 'q')) 
+			{
 				return(inText.front());
 			}
 		}		
 			
-		cout << "Invalid command. Valid options are m, e, p, c, t, s, q and l" << endl;
+		cout << "Invalid command. Valid options are m, e, p, c, t, s, and q" << endl;
 			
 	}
 				
@@ -445,9 +449,9 @@ void TerminalUI::runUI() {
 				cout << "Motion Profile Saved." << endl;			
 				break;
 
-			case 'l':		
-				fileU.loadProfile(&mProfile);
-				cout << "Motion Profile Loaded." << endl;						
+//			case 'l':		
+//				fileU.loadProfile(&mProfile);
+//				cout << "Motion Profile Loaded." << endl;						
 				break;
 
 			case 'q':
@@ -490,11 +494,18 @@ void TerminalUI::autoRunUI() {
 		
 		// wait for the button to be pressed. Poll every ms
 		cout << "Waiting for button press.." << endl;
+
+		// turn off the motors while we wait				
+		sUpdater->setPWMRunState(false);
+
 		while (!sUpdater->getButtonState()) {
 			nanosleep(&tp, NULL);
 		}
 			
 		// Button was pushed, run profile
+		
+		// turn the motors on because it is time to move!
+		sUpdater->setPWMRunState(true);						
 		
 		for (int x = 0; x < mProfile.numSteps; x++) {
 			
@@ -523,9 +534,10 @@ void TerminalUI::editProfile() {
 	for (int x=0; x<mProfile.numSteps; x++) {
 		
 		sUpdater->goToPos(mProfile.posA[x], mProfile.posB[x], mProfile.posC[x], mProfile.posD[x], mProfile.posE[x], mProfile.speed[x], mProfile.pause[x]);						
-		cout << "Moving to step:" << x << " pan:" << mProfile.posA[x] <<
-			" tilt:" << mProfile.posB[x]  << " at speed:" << mProfile.speed[x]  <<
-			" for pause:" << mProfile.pause[x] << endl;
+		cout << "Moving to step:" << x << " posA:" << mProfile.posA[x] <<
+			" posB:" << mProfile.posB[x]  << " posC:" << mProfile.posC[x]  << 
+			" posD:" << mProfile.posD[x]  << " posE:" << mProfile.posE[x]  << 
+			" at speed:" << mProfile.speed[x]  << " for pause:" << mProfile.pause[x] << endl;
 							  
 		while(!sUpdater->getmoveComplete()) {						
 			nanosleep(&tp, NULL);						
