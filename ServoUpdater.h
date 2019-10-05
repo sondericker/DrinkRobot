@@ -4,14 +4,14 @@
 #define PWM_HAT_ADDRESS 		0x40		// address of PWM hat hardware
 #define PWM_FREQ				50			// 20ms
 
-#define NEUTRAL_POSA .5
-#define NEUTRAL_POSB .955
-#define NEUTRAL_POSC .895
-#define NEUTRAL_POSD 1.0
-#define NEUTRAL_POSE .48
+#define NEUTRAL_POSA 0.5050
+#define NEUTRAL_POSB 0.9400
+#define NEUTRAL_POSC 0.8750
+#define NEUTRAL_POSD 0.5100
+#define NEUTRAL_POSE 0.5000
 
-#define LOW_CENTER_VAL 	0.495		// low value for which the continuous servo is turned off
-#define HIGH_CENTER_VAL	0.505		// high value for which the continuous servo is turned off
+#define LOW_CENTER_VAL 	0.4950		// low value for which the continuous servo is turned off
+#define HIGH_CENTER_VAL	0.5050		// high value for which the continuous servo is turned off
 
 #include <pthread.h>
 #include "PWMDriver.h"
