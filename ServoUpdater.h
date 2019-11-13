@@ -5,9 +5,9 @@
 #define PWM_FREQ				50			// 20ms
 
 #define NEUTRAL_POSA 0.5050
-#define NEUTRAL_POSB 0.9400
-#define NEUTRAL_POSC 0.8750
-#define NEUTRAL_POSD 0.5100
+#define NEUTRAL_POSB 0.9300
+#define NEUTRAL_POSC 0.860
+#define NEUTRAL_POSD 0.600
 #define NEUTRAL_POSE 0.5000
 
 #define LOW_CENTER_VAL 	0.4950		// low value for which the continuous servo is turned off
